@@ -27,6 +27,11 @@ public class Main {
             } else if (twoDArray[i][j]!=9) {
                 twoDArray[i][j]=twoDArray[i][j];
             }}
+            /* 第二种方法
+            if (i==j){
+            twoDArray[i][j]=0;
+            }
+            */
 
             //System.out.println(twoDArray[i][j]);
         }
