@@ -57,3 +57,79 @@ public class Main {
 
     }
 }
+
+
+public class Main {
+    public static void main(String[] args) {
+        //Course part
+        Course cs = new Course();
+        Course cs1 = new Course();
+        String[] couses = new String[2];
+        for (int i = 0; i < couses.length; i++) {
+            Input it = new Input();
+            String a = it.Course(i);
+            couses[i]=a;
+        }
+
+        double[] test = new double[8];
+        double[] test1 = new double[8];
+        String[] stdnames = new String[2];
+        double[] assignGrade = new double[2];
+        //遍历两个课程部分
+        for (int i = 0; i < couses.length; i++) {
+            System.out.println("Enter students for "+couses[i]);
+            Input it1 =new Input();
+            Student st = new Student();
+            // input student name
+
+            for (int k = 0; k < stdnames.length; k++) {
+                String b = it1.StdNames(k);
+                stdnames[k]=b;
+                System.out.println(stdnames[k]);
+                test[0]=it1.Agrade(b,1);
+                test[1]=it1.Agrade(b,2);
+                if (i==0){
+                    //course1 as1 and as2 total grade
+                cs.Assignment1= cs.Assignment1+test[0];
+                    cs.Assignment2= cs.Assignment2+test[1];}
+                else if (i==1) {
+                    //course2 as1 and as2 total grade
+                    cs1.Assignment1= cs1.Assignment1+test[0];
+                    cs1.Assignment2= cs1.Assignment2+test[1];
+                }
+
+                //test1[0]=test[0];
+                //for (int l = 0; l < 2; l++) {
+                   // test[l]=it1.Agrade(b,(l+1));
+                  //  System.out.println(test[l]);
+                  //  }
+
+
+
+
+                //for (int j = 0; j < assignGrade.length; j++) {
+                  //  double c = it1.Agrade(b,(j+1));
+                    //assignGrade[j]=c;
+                    //}
+                //test[k]=assignGrade[1];
+
+                    }
+
+                }
+        //for (int i = 0; i < assignGrade.length; i++) {
+          //  System.out.println(assignGrade[i]);
+        //}
+        //for (int i = 0; i < test.length; i++) {
+          //  System.out.println(test[i]);
+        //}
+        System.out.println(cs.Assignment1);
+        System.out.println(cs.Assignment2);
+        System.out.println(cs1.Assignment1);
+        System.out.println(cs1.Assignment2);
+
+            }
+
+
+
+
+    }
