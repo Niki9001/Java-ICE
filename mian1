@@ -1,0 +1,93 @@
+public class Main {
+    public static void main(String[] args) {
+        //Declare part
+        Input it = new Input();
+        Course cs = new Course();
+        Course cs1 = new Course();
+        //Array part
+            //Course part
+        String[] CourseName = new String[2];
+        for (int i = 0; i < CourseName.length; i++) {
+            CourseName[i]=it.Course(i);
+        }
+        String[] stdInfo = new String[2];//TODO
+        double[] C1A1 = new double[4];
+        double[] C1A2 = new double[4];
+        // verify CourseName array
+        //System.out.println(CourseName[0]);
+        //System.out.println(CourseName[1]);
+            //Student part
+        String[] StudentName = new String[2];// need modify
+        double[] StudentPsGrade = new double[2]; //2 assignment grade
+        //Two courses
+        for (int l = 0; l < CourseName.length; l++) {
+            System.out.println("Enter student for "+CourseName[l]);
+            //Input student's name
+            for (int i = 0; i < StudentName.length; i++) {
+                StudentName[i]=it.StdNames(i);
+                //Input student's grade
+                for (int j = 0; j < 2; j++) {
+                    //测试成绩array
+//                    for (int k = 0; k < C1A1.length; k++) {
+//                        if (j==0){
+//                            C1A1[k]=StudentPsGrade[0];
+//                        } else if (j==1) {
+//                            C1A2[k]=StudentPsGrade[1];
+//                        }
+//                    }
+
+                    StudentPsGrade[j]=it.Agrade(StudentName[i],(j+1));
+                    // Course static part
+                    if (l==0 && j == 0){
+                        cs.C1Assignment1= cs.C1Assignment1+StudentPsGrade[0];
+                        //C1A1[0]=StudentPsGrade[0];
+                        //System.out.println("c1a1 "+cs.C1Assignment1);
+                    } else if (l==0 && j == 1) {
+                        cs.C1Assignment2= cs.C1Assignment2+StudentPsGrade[1];
+                        //C1A2[0]=StudentPsGrade[1];
+                        //System.out.println("c1a2 "+cs.C1Assignment2);
+                    }
+                    else if (l==1 && j==0) {
+                        cs1.C1Assignment1= cs1.C1Assignment1+StudentPsGrade[0];
+                        //C1A1[1]=StudentPsGrade[0];
+                        //System.out.println("c2a1 "+cs1.C1Assignment1);
+                    } else if (l==1 && j==1) {
+                        cs1.C1Assignment2= cs1.C1Assignment2+StudentPsGrade[1];
+                        //C1A2[1]=StudentPsGrade[1];
+                        //System.out.println("c2a2 "+cs1.C1Assignment2);
+                    }
+
+
+
+                }
+                /* works below 2nd course std grade*/
+                Student st = new Student();
+                st.Student1(StudentName[i],StudentPsGrade[0],StudentPsGrade[1]);
+                stdInfo[i]= st.Student1(StudentName[i],StudentPsGrade[0],StudentPsGrade[1]);
+
+                //st.StdName=StudentName[i];
+                //st.StAgOne=StudentPsGrade[1];
+                //st.StAgTwo=StudentPsGrade[0];
+
+        }
+
+
+        }
+        for (int i = 0; i < stdInfo.length; i++) {
+            System.out.println(stdInfo[i]);
+        }
+
+        // print course report
+        System.out.println("REPORT: Stats per Course");
+        System.out.println("===============================");
+        System.out.println(cs.CourseReport(CourseName[0], cs.C1Assignment1, cs.C1Assignment2));
+        System.out.println(cs1.CourseReport(CourseName[1], cs1.C1Assignment1, cs1.C1Assignment2));
+        // print student report
+        System.out.println("REPORT: Stats per student");
+        System.out.println("===============================");
+        for (int i = 0; i < stdInfo.length; i++) {
+            System.out.println(stdInfo[i]);
+        }
+
+    }
+}
