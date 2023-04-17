@@ -12,12 +12,20 @@ public class CharacterGen extends JFrame {
     JPanel jp1,jp2,jp3,jp4,jp5,jp6;
     JTextField JTN;
     JTextArea Cintro,wst1,wst2,ftx, cst1, cst2, cst3, cst4;
+    private String characterType;
+    private String characterImagePath;
+
     public CharacterGen(){
         init();
+    }
+    public interface PlayerCharacterListener {
+        void onPlayerCharacterSelected(String characterType, String imagePath);
     }
     private void init() {
         Container container = this.getContentPane();
         container.setLayout(null);
+        Color lightBlue = new Color(136, 148, 212);
+        container.setBackground(lightBlue);
         //Character generator
         cgLabel = new JLabel("Character Generator");
         cgLabel.setSize(300,40);
@@ -58,6 +66,7 @@ public class CharacterGen extends JFrame {
         jp3.add(cst4);
         jp3.setSize(40,120);
         jp3.setLocation(470,130);
+        jp3.setBackground(lightBlue);
 
         Cintro = new JTextArea(2,40);
         Cintro.setSize(325,60);
@@ -67,14 +76,31 @@ public class CharacterGen extends JFrame {
         Cintro.setEditable(false);
 
         ctr1 = new JRadioButton("Warrior");
-        ctr1.addItemListener(new CharacterTypeItemListener(CharacterType.WARRIOR, im, cst1, cst2, cst3, cst4, Cintro));
+        ctr1.setBackground(lightBlue);
+        //ctr1.addItemListener(new CharacterTypeItemListener(CharacterType.WARRIOR, im, cst1, cst2, cst3, cst4, Cintro));
         ctr2 = new JRadioButton("Wizard");
-        ctr2.addItemListener(new CharacterTypeItemListener(CharacterType.WIZARD, im, cst1, cst2, cst3, cst4, Cintro));
+        ctr2.setBackground(lightBlue);
+        //ctr2.addItemListener(new CharacterTypeItemListener(CharacterType.WIZARD, im, cst1, cst2, cst3, cst4, Cintro));
         ctr3 = new JRadioButton("Cleric");
-        ctr3.addItemListener(new CharacterTypeItemListener(CharacterType.CLERIC, im, cst1, cst2, cst3, cst4, Cintro));
+        ctr3.setBackground(lightBlue);
+        //ctr3.addItemListener(new CharacterTypeItemListener(CharacterType.CLERIC, im, cst1, cst2, cst3, cst4, Cintro));
+        // add listener
+        PlayerCharacterListener playerCharacterListener = new PlayerCharacterListener() {
+            @Override
+            public void onPlayerCharacterSelected(String characterType, String imagePath) {
+                CharacterGen.this.characterType = characterType;
+                CharacterGen.this.characterImagePath = imagePath;
+            }
+        };
+
+
+        ctr1.addItemListener(new CharacterTypeItemListener(CharacterType.WARRIOR, im, cst1, cst2, cst3, cst4, Cintro, playerCharacterListener));
+        ctr2.addItemListener(new CharacterTypeItemListener(CharacterType.WIZARD, im, cst1, cst2, cst3, cst4, Cintro, playerCharacterListener));
+        ctr3.addItemListener(new CharacterTypeItemListener(CharacterType.CLERIC, im, cst1, cst2, cst3, cst4, Cintro, playerCharacterListener));
         jp1 = new JPanel(new GridLayout(3,1));
         jp1.setSize(100,120);
         jp1.setLocation(40,130);
+        jp1.setBackground(lightBlue);
         bg = new ButtonGroup();
         bg.add(ctr1);
         bg.add(ctr2);
@@ -95,6 +121,7 @@ public class CharacterGen extends JFrame {
         jp2.add(cs4);
         jp2.setSize(100,120);
         jp2.setLocation(370,130);
+        jp2.setBackground(lightBlue);
 
 
 
@@ -124,6 +151,7 @@ public class CharacterGen extends JFrame {
         jp5.add(ws2);
         jp5.setSize(100,60);
         jp5.setLocation(360,350);
+        jp5.setBackground(lightBlue);
 
         wst1 = new JTextArea();
         wst2 = new JTextArea();
@@ -132,6 +160,7 @@ public class CharacterGen extends JFrame {
         jp6.add(wst2);
         jp6.setSize(40,120);
         jp6.setLocation(470,355);
+        jp6.setBackground(lightBlue);
 
         ftx = new JTextArea();
         ftx.setSize(325,80);
@@ -142,10 +171,13 @@ public class CharacterGen extends JFrame {
 
         syw1 = new JRadioButton("Dagger");
         syw1.addItemListener(new SYWListener(WaponType.DAGGER, im2, wst1, wst2,ftx));
+        syw1.setBackground(lightBlue);
         syw2 = new JRadioButton("Sword");
         syw2.addItemListener(new SYWListener(WaponType.SWORD, im2, wst1, wst2,ftx));
+        syw2.setBackground(lightBlue);
         syw3 = new JRadioButton("Hammer");
         syw3.addItemListener(new SYWListener(WaponType.HAMMER, im2, wst1, wst2,ftx));
+        syw3.setBackground(lightBlue);
         bg2 = new ButtonGroup();
         bg2.add(syw1);
         bg2.add(syw2);
@@ -156,6 +188,7 @@ public class CharacterGen extends JFrame {
         jp4.add(syw3);
         jp4.setSize(100,120);
         jp4.setLocation(40,350);
+        jp4.setBackground(lightBlue);
 
 
 
@@ -164,17 +197,23 @@ public class CharacterGen extends JFrame {
         sb.setLocation(380,500);
         sb.setFont(new Font("Old English Text MT",Font.BOLD,16));
 
+        // Listener
         sb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String characterName = JTN.getText();
                 String characterType = "";
+                String characterType1 = "";
                 if (ctr1.isSelected()) {
                     characterType = "Warrior \nHP: 100    Defense: 60    Agility: 40    Base Attack: 20";
+                    characterType1 = "Warrior";
+
                 } else if (ctr2.isSelected()) {
                     characterType = "Wizard  \nHP: 20     Defense: 60    Agility: 100    Base Attack: 40";
+                    characterType1 = "Wizard";
                 } else if (ctr3.isSelected()) {
                     characterType = "Cleric  \nHP: 40     Defense: 100    Agility: 20    Base Attack: 60" ;
+                    characterType1 = "Cleric";
                 }
 
                 String weaponType = "";
@@ -186,7 +225,8 @@ public class CharacterGen extends JFrame {
                     weaponType = "Hammer \tWeight: 20    Attack Mod: 10";
                 }
 
-                BattlePage bp = new BattlePage(characterName, characterType, weaponType);
+
+                BattlePage bp = new BattlePage(characterName, characterType,characterType1, weaponType,characterImagePath);
                 bp.setSize(600, 650);
                 bp.setTitle("DND Game");
                 bp.setLocationRelativeTo(null);

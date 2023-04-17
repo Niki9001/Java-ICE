@@ -11,12 +11,17 @@ public class WelcomePage extends JFrame {
         init();
     }
     private void init(){
+
+
         Container container = this.getContentPane();
         container.setLayout(null);
+        Color lightBlue = new Color(136, 148, 212);
+        container.setBackground(lightBlue);
+
         //jPanel1= new JPanel();
         //button
         jButton1 = new JButton("Build a character");
-        jButton1.setSize(150,50);
+        jButton1.setSize(150,30);
         jButton1.setLocation(220,500);
         jButton1.setFont(new Font("Old English Text MT",Font.BOLD,15));
 

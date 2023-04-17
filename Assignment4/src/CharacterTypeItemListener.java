@@ -14,7 +14,34 @@ public class CharacterTypeItemListener implements ItemListener {
     private JLabel im;
     private JTextArea Cintro,cst1, cst2, cst3, cst4;
 
-    public CharacterTypeItemListener(CharacterType characterType, JLabel im, JTextArea cst1, JTextArea cst2, JTextArea cst3, JTextArea cst4, JTextArea Cintro) {
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            updateCharacterStats(characterType);
+            String characterTypeString = "";
+            String imagePath = "";
+            switch (characterType) {
+                case WARRIOR:
+                    characterTypeString = "Warrior";
+                    imagePath = "fighter.png";
+                    break;
+                case WIZARD:
+                    characterTypeString = "Wizard";
+                    imagePath = "wizard.png";
+                    break;
+                case CLERIC:
+                    characterTypeString = "Cleric";
+                    imagePath = "dwarf.png";
+                    break;
+            }
+            playerCharacterListener.onPlayerCharacterSelected(characterTypeString, imagePath);
+        }
+    }
+
+    private CharacterGen.PlayerCharacterListener playerCharacterListener;
+
+    public CharacterTypeItemListener(CharacterType characterType, JLabel im, JTextArea cst1, JTextArea cst2, JTextArea cst3, JTextArea cst4, JTextArea Cintro, CharacterGen.PlayerCharacterListener playerCharacterListener) {
         this.characterType = characterType;
         this.im = im;
         this.cst1 = cst1;
@@ -22,13 +49,7 @@ public class CharacterTypeItemListener implements ItemListener {
         this.cst3 = cst3;
         this.cst4 = cst4;
         this.Cintro = Cintro;
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        if (e.getStateChange() == ItemEvent.SELECTED) {
-            updateCharacterStats(characterType);
-        }
+        this.playerCharacterListener = playerCharacterListener;
     }
 
     private void updateCharacterStats(CharacterType characterType) {

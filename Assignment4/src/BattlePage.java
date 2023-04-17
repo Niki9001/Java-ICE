@@ -8,20 +8,22 @@ public class BattlePage extends JFrame {
     JPanel jp1,jp2;
     JTextArea ja;
     JButton ba;
-    public BattlePage(String characterName, String characterType, String weaponType) {
-        init(characterName, characterType, weaponType);
+    public BattlePage(String characterName, String characterType, String characterType1,String weaponType, String characterImagePath) {
+        init(characterName, characterType, characterType1, weaponType,characterImagePath);
     }
-    private void init (String characterName, String characterType, String weaponType){
+    private void init (String characterName, String characterType,String characterType1, String weaponType, String characterImagePath){
         Container container = this.getContentPane();
+        Color lightBlue = new Color(136, 148, 212);
+        container.setBackground(lightBlue);
         container.setLayout(null);
         bttd = new JLabel("Battle To The Death!");
         bttd.setSize(500,100);
         bttd.setLocation(60,20);
         bttd.setFont(new Font("Old English Text MT",Font.BOLD,48));
 
-        pw = new JLabel("Player: ");
-        pw.setSize(160,40);
-        pw.setLocation(120,120);
+        pw = new JLabel("Player: "+characterType1);
+        pw.setSize(180,40);
+        pw.setLocation(110,120);
         pw.setFont(new Font("Times New Roma",Font.BOLD,20));
 
         mg = new JLabel("Monster: Gazer");
@@ -30,8 +32,9 @@ public class BattlePage extends JFrame {
         mg.setFont(new Font("Times New Roma",Font.BOLD,20));
 
         jp1 = new JPanel();
-        jp1.setSize(50,100);
-        jp1.setLocation(140,200);
+        jp1.setSize(150,130);
+        jp1.setLocation(110,165);
+        jp1.setBackground(lightBlue);
 
         jp2 = new JPanel();
         mgi = new JLabel(new ImageIcon("monster.jpg"));
@@ -62,6 +65,9 @@ public class BattlePage extends JFrame {
                 cg.setVisible(true); // 显示CharacterGen窗口
             }
         });
+        pwi = new JLabel(new ImageIcon(characterImagePath));
+        jp1.add(pwi);
+
         container.add(bttd);
         container.add(pw);
         container.add(mg);
