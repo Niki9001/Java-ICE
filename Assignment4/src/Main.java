@@ -9,8 +9,6 @@ public class Main {
         welcomePage.setVisible(true);
         welcomePage.setLocationRelativeTo(null);
 
-
-
         /* check local font
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         String[] fonts = ge.getAvailableFontFamilyNames();

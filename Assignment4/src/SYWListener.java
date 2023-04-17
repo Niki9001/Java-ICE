@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 
 enum WaponType {
     DAGGER, SWORD, HAMMER
+    /*TODO:WaponType (Weapon Type): This is an enumerated type that represents the three weapon types in the game: DAGGER, SWORD and HAMMER.*/
 }
 public class SYWListener implements ItemListener {
     private WaponType waponType;
