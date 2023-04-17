@@ -7,6 +7,9 @@ public class Main {
         welcomePage.setSize(600, 650);
         welcomePage.setTitle("DND Game");
         welcomePage.setVisible(true);
+        welcomePage.setLocationRelativeTo(null);
+
+
 
         /* check local font
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

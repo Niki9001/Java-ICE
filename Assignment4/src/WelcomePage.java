@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class WelcomePage extends JFrame {
     JButton jButton1;
@@ -17,7 +19,6 @@ public class WelcomePage extends JFrame {
         jButton1.setSize(150,50);
         jButton1.setLocation(220,500);
         jButton1.setFont(new Font("Old English Text MT",Font.BOLD,15));
-        jButton1.addActionListener(new ButtonClickListener(this, ButtonActionType.BUILD_CHARACTER));
 
 
         //text
@@ -31,6 +32,18 @@ public class WelcomePage extends JFrame {
         jLabel2.setSize(400,400);
         jLabel2.setLocation(100,100);
 
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WelcomePage.this.dispose(); // 关闭当前窗口
+                CharacterGen cg = new CharacterGen(); // 创建CharacterGen实例
+                cg.setSize(600, 650);
+                cg.setTitle("DND Game");
+                cg.setLocationRelativeTo(null);
+                cg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                cg.setVisible(true); // 显示CharacterGen窗口
+            }
+        });
 
 
         container.add(jButton1);

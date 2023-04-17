@@ -12,10 +12,9 @@ enum CharacterType {
 public class CharacterTypeItemListener implements ItemListener {
     private CharacterType characterType;
     private JLabel im;
-    private JTextField cst1, cst2, cst3, cst4;
-    private JTextArea Cintro;
+    private JTextArea Cintro,cst1, cst2, cst3, cst4;
 
-    public CharacterTypeItemListener(CharacterType characterType, JLabel im, JTextField cst1, JTextField cst2, JTextField cst3, JTextField cst4, JTextArea Cintro) {
+    public CharacterTypeItemListener(CharacterType characterType, JLabel im, JTextArea cst1, JTextArea cst2, JTextArea cst3, JTextArea cst4, JTextArea Cintro) {
         this.characterType = characterType;
         this.im = im;
         this.cst1 = cst1;

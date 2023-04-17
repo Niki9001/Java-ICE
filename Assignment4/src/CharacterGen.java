@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CharacterGen extends JFrame {
     JLabel cgLabel, enLabel, ctLabel, csLabel, im, im2, cs1, cs2, cs3, cs4,
@@ -8,8 +10,8 @@ public class CharacterGen extends JFrame {
     JButton rel, sb;
     ButtonGroup bg, bg2;
     JPanel jp1,jp2,jp3,jp4,jp5,jp6;
-    JTextField JTN, cst1, cst2, cst3, cst4;
-    JTextArea Cintro,wst1,wst2,ftx;
+    JTextField JTN;
+    JTextArea Cintro,wst1,wst2,ftx, cst1, cst2, cst3, cst4;
     public CharacterGen(){
         init();
     }
@@ -45,10 +47,10 @@ public class CharacterGen extends JFrame {
         im.setSize(100,120);
         im.setLocation(180,130);
 
-        cst1 = new JTextField(10);
-        cst2 = new JTextField(10);
-        cst3 = new JTextField(10);
-        cst4 = new JTextField(100);
+        cst1 = new JTextArea();
+        cst2 = new JTextArea();
+        cst3 = new JTextArea();
+        cst4 = new JTextArea();
         jp3 = new JPanel(new GridLayout(4,1,0,8));
         jp3.add(cst1);
         jp3.add(cst2);
@@ -161,7 +163,40 @@ public class CharacterGen extends JFrame {
         sb.setSize(120,20);
         sb.setLocation(380,500);
         sb.setFont(new Font("Old English Text MT",Font.BOLD,16));
-        sb.addActionListener(new ButtonClickListener(this, ButtonActionType.START_BATTLE));
+
+        sb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String characterName = JTN.getText();
+                String characterType = "";
+                if (ctr1.isSelected()) {
+                    characterType = "Warrior \nHP: 100    Defense: 60    Agility: 40    Base Attack: 20";
+                } else if (ctr2.isSelected()) {
+                    characterType = "Wizard  \nHP: 20     Defense: 60    Agility: 100    Base Attack: 40";
+                } else if (ctr3.isSelected()) {
+                    characterType = "Cleric  \nHP: 40     Defense: 100    Agility: 20    Base Attack: 60" ;
+                }
+
+                String weaponType = "";
+                if (syw1.isSelected()) {
+                    weaponType = "Dagger \tWeight: 2    Attack Mod: 1";
+                } else if (syw2.isSelected()) {
+                    weaponType = "Sword \tWeight: 10    Attack Mod: 5";
+                } else if (syw3.isSelected()) {
+                    weaponType = "Hammer \tWeight: 20    Attack Mod: 10";
+                }
+
+                BattlePage bp = new BattlePage(characterName, characterType, weaponType);
+                bp.setSize(600, 650);
+                bp.setTitle("DND Game");
+                bp.setLocationRelativeTo(null);
+                bp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                bp.setVisible(true);
+
+                CharacterGen.this.dispose();
+            }
+        });
+
 
         container.add(cgLabel);
         container.add(enLabel);
